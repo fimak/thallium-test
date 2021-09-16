@@ -1,10 +1,14 @@
-export type FetchImageParams = {
+export interface IGetImageParams {
   page: number,
   limit: number
-
 }
 
-export interface ImageItemType {
+export interface IDeleteImageParams {
+  albumId: number,
+  id: number,
+}
+
+export interface IImageGalleryItem {
   albumId: number,
   id: number,
   title: string,
@@ -12,12 +16,11 @@ export interface ImageItemType {
   thumbnailUrl: string
 }
 
-export interface GalleryState {
-  imageList: [ImageItemType] | [],
+export interface IGalleryState {
+  imageList: [IImageGalleryItem] | [],
   page: number,
   perPage: number,
   status: 'pending' | 'success' | 'error' | undefined,
   sortBy: string | undefined,
   filterBy: string | undefined
-
 }

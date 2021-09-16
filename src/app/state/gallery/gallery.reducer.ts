@@ -1,9 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchImages } from './gallery.actions';
-import { GalleryState } from './gallery.types';
+import { getImages } from './gallery.actions';
+import { IGalleryState } from './gallery.types';
 
-
-const initialState: GalleryState = {
+const initialState: IGalleryState = {
   imageList: [],
   page: 1,
   perPage: 10,
@@ -12,7 +11,7 @@ const initialState: GalleryState = {
   filterBy: undefined
 };
 
-export const imageGallerySlice = createSlice({
+export const gallerySlice = createSlice({
   name: 'gallery',
   initialState,
   reducers: {
@@ -34,17 +33,17 @@ export const imageGallerySlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchImages.pending, (state) => {
+      .addCase(getImages.pending, (state) => {
         state.status = 'pending';
       })
-      .addCase(fetchImages.fulfilled, (state, action) => {
+      .addCase(getImages.fulfilled, (state, action) => {
         state.status = 'success';
         state.imageList = action.payload;
       })
-      .addCase(fetchImages.rejected, (state, action) => {
+      .addCase(getImages.rejected, (state, action) => {
         state.status = 'error';
       })
   },
 });
 
-export default imageGallerySlice.reducer
+export default gallerySlice.reducer
