@@ -4,7 +4,6 @@ export interface IGetImageParams {
 }
 
 export interface IDeleteImageParams {
-  albumId: number,
   id: number,
 }
 
