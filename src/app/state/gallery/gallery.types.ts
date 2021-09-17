@@ -3,10 +3,6 @@ export interface IGetImageParams {
   limit: number
 }
 
-export interface IDeleteImageParams {
-  id: number,
-}
-
 export interface IImageGalleryItem {
   albumId: number,
   id: number,

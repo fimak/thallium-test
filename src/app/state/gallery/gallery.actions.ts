@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { galleryAPI } from '../../api/gallery';
-import { IGetImageParams, IDeleteImageParams } from './gallery.types';
+import { IGetImageParams } from './gallery.types';
 
 export const getImages = createAsyncThunk(
   'gallery/getImages',
@@ -13,7 +13,7 @@ export const getImages = createAsyncThunk(
 
 export const deleteImage = createAsyncThunk(
   'gallery/deleteImage',
-  async (id: IDeleteImageParams) => {
+  async (id: number | string) => {
     const response = await galleryAPI.delete(`/photos/${id}`);
     return response.data
   }

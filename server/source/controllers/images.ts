@@ -43,9 +43,8 @@ const deletePhoto = async (req: Request, res: Response, next: NextFunction) => {
     const id: string = req.params.id;
 
     const response: AxiosResponse = await axios.delete(`${url}/${id}`);
-    const body: Photo = response.data;
 
-    return res.status(200).json(body);
+    return res.status(200).json({ id });
   } catch (error) {
     console.log(error);
   }

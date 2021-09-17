@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getImages } from './gallery.actions';
+import { getImages, deleteImage } from './gallery.actions';
 import { IGalleryState } from './gallery.types';
 
 const initialState: IGalleryState = {
@@ -14,23 +14,7 @@ const initialState: IGalleryState = {
 export const gallerySlice = createSlice({
   name: 'gallery',
   initialState,
-  reducers: {
-    deleteImage(state, action) {
-      state.imageList.filter(image => image.id !== action.payload)
-    },
-    setPage(state, action) {
-      state.page = action.payload
-    },
-    setPerPage(state, action) {
-      state.perPage = action.payload
-    },
-    setSortBy(state, action) {
-      state.sortBy = action.payload
-    },
-    setFilterBy(state, action) {
-      state.filterBy = action.payload
-    }
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(getImages.pending, (state) => {
@@ -42,6 +26,10 @@ export const gallerySlice = createSlice({
       })
       .addCase(getImages.rejected, (state, action) => {
         state.status = 'error';
+      })
+      .addCase(deleteImage.fulfilled, (state, action) => {
+        const id = state.imageList.findIndex((image) => image.id === +action.payload.id)
+        state.imageList.splice(id, 1);
       })
   },
 });

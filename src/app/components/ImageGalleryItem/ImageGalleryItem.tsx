@@ -6,6 +6,8 @@ import ImageListItemBar from '@material-ui/core/ImageListItemBar';
 import BackspaceIcon from '@mui/icons-material/Backspace';
 import Tooltip from '@mui/material/Tooltip';
 
+import { useAppDispatch } from '../../hooks';
+import { deleteImage } from '../../state/gallery/gallery.actions';
 import { IImageGalleryItem } from '../../state/gallery/gallery.types';
 
 type ImageGalleryItemProps = {
@@ -17,9 +19,15 @@ type ImageGalleryItemProps = {
 }
 
 const ImageGalleryItem = ({ isFetching, cols, rows, imageData, showImageModal }: ImageGalleryItemProps) => {
+  const dispatch = useAppDispatch()
 
   const showModal = () => {
     showImageModal(imageData.url)
+  }
+
+  const handleDelete = () => {
+    console.log('remove: ', imageData);
+    dispatch(deleteImage(imageData.id))
   }
 
   return (
@@ -42,6 +50,7 @@ const ImageGalleryItem = ({ isFetching, cols, rows, imageData, showImageModal }:
         actionIcon={
           <Tooltip title={'Delete'} placement="left">
             <IconButton
+              onClick={handleDelete}
               sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
             >
               <BackspaceIcon/>
